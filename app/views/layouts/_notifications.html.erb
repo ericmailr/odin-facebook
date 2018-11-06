@@ -1,0 +1,7 @@
+<h3> NOTIFICATIONS </h3>
+<% if signed_in? %>
+<% current_user.requesting_friends.each do |friend| %>
+    Friend Request from <%= link_to friend.email, user_path(:id => friend.id) %>: <%= link_to "Accept", update_friendship_path(user_id: friend.id), method: :patch %> 
+<br>
+<% end %>
+<% end %>

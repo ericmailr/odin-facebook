@@ -1,0 +1,13 @@
+<br><% if @user.profile %>
+    <%= gravatar_for(@user) %>
+    <b><%= @user.email %></b><br><br>
+    <b>Friends:</b>
+    <%= @user.friends.pluck(:email).join(", ") %><br>
+    <br><b>Posts:</b><br>
+
+    <%= render 'layouts/posts' %>
+<% elsif current_user.id == @user.id %>
+    <%= link_to "Create visible profile", user_path(:user_id => @user.id), method: :patch %>
+<% else %>
+    No profile.
+<% end %>

@@ -1,0 +1,10 @@
+<b>Share a post!</b>
+<%= form_for :post, url: posts_path, method: :post  do |f| %> 
+    <%= f.text_area :body %>
+    <%= f.submit 'Post!' %>
+<% end %>
+
+<h2>feed:</h2>
+
+
+<%= render 'layouts/posts' %>

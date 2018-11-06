@@ -1,7 +1,9 @@
 class Friendship < ApplicationRecord
     belongs_to :user
-    belongs_to :friend, :class_name => "User"
+    belongs_to :friend, :class_name => "User", optional: true
+    belongs_to :pending_friend, :class_name => "User", optional: true
+    belongs_to :requesting_friend, :class_name => "User", optional: true
 
-    validates :user_id, :presence => true
-    validates :friend_id, :presence => true
+    ### ADD : HAS_ONE REQUESTER, AND HAS_ONE REQUESTER
+
 end

@@ -1,0 +1,22 @@
+<% @posts.each do |post| %>
+    ------------------------------------<br>
+    <b><%= post.user.email %> says: </b>
+    <br>---> <%= post.body %>
+    <br><%= link_to "Like", likes_path(post_id: post.id, liker_id: current_user.id), method: :post unless post.likers.include?(current_user) %> 
+    Liked by: <% post.likers.each do |liker| %>
+        <%= liker.email %>.
+    <% end %>
+    <br><br>Comments:<br>
+        <% post.comments.each do |comment| %>
+                <%= comment.body %>
+               -- <%= comment.commenter.email %>
+    <br>
+       <% end %>
+       <%= form_for :comment, url: comments_path do |f| %>
+            <%= f.text_area :body %>
+            <%= f.hidden_field(:commenter_id, :value => current_user.id) %>
+            <%= f.hidden_field(:post_id, :value => post.id) %>
+            <%= f.submit "Comment!" %>
+        <% end %>
+<% end %>
+------------------------------------<br>

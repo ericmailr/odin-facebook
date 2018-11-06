@@ -1,0 +1,27 @@
+
+<h3> Friend Requests </h3>
+<% current_user.requesting_friends.each do |requesting_friend| %>
+    <%= link_to requesting_friend.email, user_path(:id => requesting_friend.id) %>
+    <%= link_to "Accept Request", update_friendship_path(:user_id => requesting_friend.id), method: :patch %>
+    <br>
+<% end %>
+
+<h3> Friends </h3>
+<% current_user.friends.each do |friend| %>
+    <%= link_to friend.email, user_path(:id => friend.id) %>
+    <br>
+<% end %>
+
+<h3> Suggested Friends </h3>
+<% @requestable_users.each do |user| %>
+    <%= link_to user.email, user_path(:id => user.id) %>
+    <%= link_to "Send Request", friendships_path(:user_id => user.id), method: :post %>
+    <br>
+<% end %>
+
+<h3> Pending Friends </h3>
+<% current_user.pending_friends.each do |pending_friend| %>
+    <%= link_to pending_friend.email, user_path(:id => pending_friend.id) %>
+    <br>
+<% end %>
+
